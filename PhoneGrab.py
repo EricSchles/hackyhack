@@ -48,10 +48,26 @@ def _most_common(lists):
 				results[ind] += 1
 	return results 
 
-def grab(text):
+def allowed_area_codes(phone_numbers,area_codes=None):
+	"""
+	area_codes is a list of allowed area codes to check for.  If a phone number starts with those three letters it is kept,
+	otherwise the number is thrown away.
+	"""
+	final_list = []
+	if area_codes:
+		for val in phone_numbers:
+			for area_code in area_codes:
+				if val.startswith(area_code):
+					final_list.append(val)
+		return final_list
+	else:
+		return phone_numbers
+
+def grabber(text,area_codes=None):
 	text = _letter_to_number(text)
 	possible_numbers = []
 	for tol in xrange(10,17): possible_numbers.append( _phone_grab(text,tolerance=tol) )
+	possible_numbers = allowed_area_codes(possible_numbers,area_codes)
 	results = _most_common(possible_numbers)
 	max_val = 0
 	max_index = 0
