@@ -35,11 +35,24 @@ def _phone_grab(text,tolerance=10):
 
 def _most_common(lists):
 	indexes = []
+	results = {k: 0 for k in range(len(lists))}
 	for ind,elem in enumerate(lists):
 		indexes.append( [elem for elem in xrange(0,ind)] + [elem for elem in xrange(ind+1,len(lists))] )
-	for ind,elem in enumerate(lists)
+	for ind,elem in enumerate(lists):
+		for index in indexes[ind]:
+			if elem == lists[index]:
+				results[ind] += 1
+	return results 
 
 def grab(text):
 	text = _letter_to_number(text)
 	possible_numbers = []
 	for tol in xrange(10,17): possible_numbers.append( _phone_grab(text,tolerance=tol) )
+	results = _most_common(possible_numbers)
+	max_val = 0
+	max_index = 0
+	for ind,val in enumerate(possible_numbers):
+		if results[ind] > max_val:
+			max_val = results[ind]
+			max_index = ind
+	return possible_numbers[max_index]
