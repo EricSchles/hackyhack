@@ -1,3 +1,6 @@
+#Assumes you have blog.alivate.com.au/poppler-windows for windows binaries
+#for linux search poppler utils on apt-get
+#for mac look into brew - but there is a weird dependency issue
 from subprocess import call
 import sys
 
