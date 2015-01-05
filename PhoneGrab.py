@@ -32,6 +32,10 @@ def _phone_grab(text,tolerance=10):
 				phone = []
 				counter = 0
 				found = False
+		if len(phone) == 10 and phone[0] != '1':
+			return ''.join(phone)
+		if len(phone) == 11 and phone[0] == '1':
+			return ''.join(phone)
 
 def _most_common(lists):
 	indexes = []
